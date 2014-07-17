@@ -6,15 +6,15 @@ var Classmate = Backbone.Model.extend({
     Bio: ""
   },
 //generates id to be used with routes
-  url: function() {
-    if (_.isUndefined(this.attributes.id)) {
-      return appConfig.baseURL + 'classmate' + appConfig.addURL;
-    }
-    else {
-      return appConfig.baseURL + 'classmate/' + encodeURIComponent(this.attributes.id) + appConfig.addURL;
-    }
-  },
-});
+//   url: function() {
+//     if (_.isUndefined(this.attributes.id)) {
+//       return appConfig.baseURL + 'classmate' + appConfig.addURL;
+//     }
+//     else {
+//       return appConfig.baseURL + 'classmate/' + encodeURIComponent(this.attributes.id) + appConfig.addURL;
+//     }
+//   },
+// });
 
 // Collection
 var ClassmateList = Backbone.Collection.extend({
@@ -24,9 +24,8 @@ var ClassmateList = Backbone.Collection.extend({
   }
 });
 
-var classmateList = new ClassmateList();
+var classmateList = new ClassmateList([
 
-  classmateList = [
     {
       id: "_id",
       Name: "Amy",
@@ -76,15 +75,17 @@ var classmateList = new ClassmateList();
       Bio: "Student"
     }
 
-  ];
+  ]);
 
 //View
   var ClassmateListView = Backbone.View.extend({
-        initialize: function(){},
+        initialize: function(){
+
+        },
 
       render: function(){
           var source = $('#ClassmateListTemplate').html();
-          var tempate = _.template(source,{classmatesList: this.collection.toJSON()});
+          var tempate = _.template(source,{classmateList: this.collection.toJSON()});
           this.$el.html(template);
           return this;
         }
